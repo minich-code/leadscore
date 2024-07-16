@@ -1,0 +1,10 @@
+stages:
+  data_ingestion:
+    cmd: python src\LeadGen\pipelines\pip_01_data_ingestion.py
+    deps:
+    - src\LeadGen\pipelines\pip_01_data_ingestion.py
+    - config\data-ingestion.yaml
+
+    outs:
+    - artifacts\data_ingestion\lead.csv
+    - artifacts\data_ingestion\data-ingestion-metadata.json
