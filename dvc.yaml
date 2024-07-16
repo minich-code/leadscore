@@ -1,20 +1,22 @@
+
 stages:
   data_ingestion:
-    cmd: python src\LeadGen\pipelines\pip_01_data_ingestion.py
+    cmd: python src/LeadGen/pipelines/pip_01_data_ingestion.py
     deps:
-    - src\LeadGen\pipelines\pip_01_data_ingestion.py
-    - config\data-ingestion.yaml
+    - src/LeadGen/pipelines/pip_01_data_ingestion.py
+    - config/data-ingestion.yaml
 
     outs:
-    - artifacts\data_ingestion\lead.csv
-    - artifacts\data_ingestion\data-ingestion-metadata.json
+    - artifacts/data_ingestion/lead.csv
+    - artifacts/data_ingestion/data-ingestion-metadata.json
 
   data_validation:
-    cmd: python src\LeadGen\pipelines\pip_02_data_validation.py
+    cmd: python src/LeadGen/pipelines/pip_02_data_validation.py
     deps:
-    - src\LeadGen\pipelines\pip_02_data_validation.py
-    - config\data-validation.yaml
+    - src/LeadGen/pipelines/pip_02_data_validation.py 
+    - config/data-validation.yaml
 
     outs:
-    - artifacts\data_validation\status.json
+    - artifacts/data_validation/status.json
+
 

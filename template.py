@@ -41,6 +41,7 @@ list_of_files = [
     "config/data-ingestion.yaml",
     "config/data-validation.yaml",
     "config/data-transformation.yaml",
+    "config/model-trainer.yaml",
     "dvc/dvc.yaml",
     "main.py",
     "app.py",

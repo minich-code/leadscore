@@ -1,38 +1,38 @@
 schema: '2.0'
 stages:
   data_ingestion:
-    cmd: python src\LeadGen\pipelines\pip_01_data_ingestion.py
+    cmd: python src/LeadGen/pipelines/pip_01_data_ingestion.py
     deps:
-    - path: config\data-ingestion.yaml
+    - path: config/data-ingestion.yaml
       hash: md5
       md5: e66e199066513f0d609f88db0f7cd0a3
       size: 313
-    - path: src\LeadGen\pipelines\pip_01_data_ingestion.py
+    - path: src/LeadGen/pipelines/pip_01_data_ingestion.py
       hash: md5
       md5: 7eaae0b23c4df11cf94216bad2c5879e
       size: 1318
     outs:
-    - path: artifacts\data_ingestion\data-ingestion-metadata.json
+    - path: artifacts/data_ingestion/data-ingestion-metadata.json
       hash: md5
-      md5: 563a0b74aa2183caae6178fa9607978b
-      size: 250
-    - path: artifacts\data_ingestion\lead.csv
+      md5: 4eb3a62fb53d6186c2d522f2e0e44075
+      size: 251
+    - path: artifacts/data_ingestion/lead.csv
       hash: md5
       md5: 97dfe4e23c2353eee5ec511b63aea254
       size: 2430556
   data_validation:
-    cmd: python src\LeadGen\pipelines\pip_02_data_validation.py
+    cmd: python src/LeadGen/pipelines/pip_02_data_validation.py
     deps:
-    - path: config\data-validation.yaml
+    - path: config/data-validation.yaml
       hash: md5
       md5: aeb6cbb68a34c95c89a4d8c0fb2089c4
       size: 1437
-    - path: src\LeadGen\pipelines\pip_02_data_validation.py
+    - path: src/LeadGen/pipelines/pip_02_data_validation.py
       hash: md5
       md5: 260771c2ba11b30c5348a8bfa1a5d3e0
       size: 1443
     outs:
-    - path: artifacts\data_validation\status.json
+    - path: artifacts/data_validation/status.json
       hash: md5
       md5: 600476ed9deea5b977b69f00711e48ee
       size: 145
