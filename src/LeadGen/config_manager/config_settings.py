@@ -1,9 +1,7 @@
-# File: data_ingestion.py
-
 from src.LeadGen.utils.commons import read_yaml, create_directories
 from src.LeadGen.constants import * 
 from src.LeadGen.logger import logger
-from src.LeadGen.config_entity.config_params import (DataIngestionConfig, DataValidationConfig)
+from src.LeadGen.config_entity.config_params import *#(DataIngestionConfig, DataValidationConfig, DataTransformationConfig)
 
 
 class ConfigurationManager:
@@ -11,15 +9,18 @@ class ConfigurationManager:
         self, 
         data_ingestion_config=DATA_INGESTION_CONFIG_FILEPATH,
         data_validation_config=DATA_VALIDATION_CONFIG_FILEPATH, 
-        schema_config=SCHEMA_CONFIG_FILEPATH
+        schema_config=SCHEMA_CONFIG_FILEPATH,
+        data_preprocessing_config=DATA_TRANSFORMATION_FILEPATH
     ): 
 
         self.ingestion_config = read_yaml(data_ingestion_config)
         self.data_val_config = read_yaml(data_validation_config)
         self.schema = read_yaml(schema_config)
+        self.preprocessing_config = read_yaml(data_preprocessing_config)
 
         create_directories([self.ingestion_config.artifacts_root])
         create_directories([self.data_val_config.artifacts_root])
+        create_directories([self.preprocessing_config.artifacts_root])
 
 
 # Data ingestion config
@@ -52,4 +53,16 @@ class ConfigurationManager:
             all_schema=schema,
             critical_columns=data_valid_config.critical_columns,
             data_ranges=data_valid_config.data_ranges
+        )
+
+# Data Transformation 
+      
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        transformation_config = self.preprocessing_config.data_transformation
+        create_directories([transformation_config.root_dir])
+        return DataTransformationConfig(
+            root_dir=Path(transformation_config.root_dir),
+            data_path=Path(transformation_config.data_path),
+            numerical_cols=transformation_config.numerical_cols,
+            categorical_cols=transformation_config.categorical_cols
         )

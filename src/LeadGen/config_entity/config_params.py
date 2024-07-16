@@ -24,3 +24,13 @@ class DataValidationConfig:
     all_schema: dict
     critical_columns: list  
     data_ranges: dict
+
+
+# Data Transformation Entity
+
+@dataclass
+class DataTransformationConfig:
+    root_dir: Path
+    data_path: Path
+    numerical_cols: list
+    categorical_cols: list

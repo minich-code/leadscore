@@ -7,7 +7,7 @@ import sys
 SCHEMA_CONFIG_FILEPATH = Path("config\data-schema.yaml")
 DATA_INGESTION_CONFIG_FILEPATH = Path("config\data-ingestion.yaml")
 DATA_VALIDATION_CONFIG_FILEPATH = Path("config\data-validation.yaml")
-# DATA_TRANSFORMATION_FILEPATH = Path("config\data-transformation.yaml")
+DATA_TRANSFORMATION_FILEPATH = Path("config\data-transformation.yaml")
 # MODEL_TRAINER_CONFIG_FILEPATH = Path("config\model-trainer.yaml")
 # MODEL_EVALUATION_CONFIG_FILEPATH = Path("config\model-evaluation.yaml")
 # MODEL_VALIDATION_CONFIG_FILEPATH = Path("config\model-validation.yaml")

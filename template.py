@@ -40,6 +40,7 @@ list_of_files = [
     "config/data-schema.yaml",
     "config/data-ingestion.yaml",
     "config/data-validation.yaml",
+    "config/data-transformation.yaml",
     "dvc/dvc.yaml",
     "main.py",
     "app.py",
