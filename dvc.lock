@@ -20,3 +20,19 @@ stages:
       hash: md5
       md5: 97dfe4e23c2353eee5ec511b63aea254
       size: 2430556
+  data_validation:
+    cmd: python src\LeadGen\pipelines\pip_02_data_validation.py
+    deps:
+    - path: config\data-validation.yaml
+      hash: md5
+      md5: aeb6cbb68a34c95c89a4d8c0fb2089c4
+      size: 1437
+    - path: src\LeadGen\pipelines\pip_02_data_validation.py
+      hash: md5
+      md5: 260771c2ba11b30c5348a8bfa1a5d3e0
+      size: 1443
+    outs:
+    - path: artifacts\data_validation\status.json
+      hash: md5
+      md5: 600476ed9deea5b977b69f00711e48ee
+      size: 145

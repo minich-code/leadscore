@@ -12,3 +12,15 @@ class DataIngestionConfig:
     database_name: str
     collection_name: str
     batch_size: int
+
+
+# Data validation Entity 
+
+@dataclass
+class DataValidationConfig:
+    root_dir: Path
+    STATUS_FILE: str
+    data_dir: Path
+    all_schema: dict
+    critical_columns: list  
+    data_ranges: dict

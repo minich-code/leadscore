@@ -8,3 +8,13 @@ stages:
     outs:
     - artifacts\data_ingestion\lead.csv
     - artifacts\data_ingestion\data-ingestion-metadata.json
+
+  data_validation:
+    cmd: python src\LeadGen\pipelines\pip_02_data_validation.py
+    deps:
+    - src\LeadGen\pipelines\pip_02_data_validation.py
+    - config\data-validation.yaml
+
+    outs:
+    - artifacts\data_validation\status.json
+

@@ -39,6 +39,7 @@ list_of_files = [
     "config/model-params.yaml",
     "config/data-schema.yaml",
     "config/data-ingestion.yaml",
+    "config/data-validation.yaml",
     "dvc/dvc.yaml",
     "main.py",
     "app.py",
