@@ -11,5 +11,5 @@ MODEL_TRAINER_CONFIG_FILEPATH = Path("config\model-trainer.yaml")
 PARAMS_CONFIG_FILEPATH = Path("config\model-params.yaml")
 MODEL_EVALUATION_CONFIG_FILEPATH = Path("config\model-evaluation.yaml")
 MODEL_VALIDATION_CONFIG_FILEPATH = Path("config\model-validation.yaml")
-# PREDICTION_PIPELINE_FILEPATH = Path("config\prediction-pipeline.yaml")
+PREDICTION_PIPELINE_FILEPATH = Path("config\prediction-pipeline.yaml")
 

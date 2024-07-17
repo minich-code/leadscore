@@ -36,9 +36,9 @@ mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
 
 # Access dvc environmental variables
 #dvc remote add origin s3://dvc
-endpoint_url = os.getenv("DVC_REMOTE_ORIGIN_ENDPOINTURL")
-access_key_id = os.getenv("DVC_REMOTE_ORIGIN_ACCESS_KEY_ID")
-secret_access_key = os.getenv("DVC_REMOTE_ORIGIN_SECRET_ACCESS_KEY")
+# endpoint_url = os.getenv("DVC_REMOTE_ORIGIN_ENDPOINTURL")
+# access_key_id = os.getenv("DVC_REMOTE_ORIGIN_ACCESS_KEY_ID")
+# secret_access_key = os.getenv("DVC_REMOTE_ORIGIN_SECRET_ACCESS_KEY")
 
 
 @dataclass
