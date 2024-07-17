@@ -34,3 +34,24 @@ class DataTransformationConfig:
     data_path: Path
     numerical_cols: list
     categorical_cols: list
+
+
+# Model Trainer 
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    model_name: str
+    train_features_path: Path
+    train_targets_path: Path
+    val_features_path: Path
+    val_targets_path: Path
+    val_metrics_path: Path
+    batch_size: int
+    learning_rate: float
+    epochs: int
+    dropout_rates: dict  
+    optimizer: str
+    loss_function: str
+    activation_function: str
+    # mlflow 
+    mlflow_uri: str

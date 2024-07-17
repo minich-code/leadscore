@@ -36,3 +36,87 @@ stages:
       hash: md5
       md5: 600476ed9deea5b977b69f00711e48ee
       size: 145
+  model_training:
+    cmd: python src/LeadGen/pipelines/pip_04_model_trainer.py
+    deps:
+    - path: config/model-params.yaml
+      hash: md5
+      md5: 94238682b3be41b43f28222c08814748
+      size: 219
+    - path: config/model-trainer.yaml
+      hash: md5
+      md5: 38647f989212c0a91caaa1ee9301a69d
+      size: 508
+    - path: src/LeadGen/pipelines/pip_04_model_trainer.py
+      hash: md5
+      md5: 7c941e558b857e79748378776715df16
+      size: 1029
+    outs:
+    - path: artifacts/model_trainer/model_epoch_1.pt
+      hash: md5
+      md5: c9e7302389fe24f1e6fcd0a0b5411ade
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_10.pt
+      hash: md5
+      md5: e428db226055d70cd91e077b2e213169
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_11.pt
+      hash: md5
+      md5: 133bd3d4e569f94e585245f34026752e
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_12.pt
+      hash: md5
+      md5: cb32d0225ba45d01684882e701e7fb12
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_13.pt
+      hash: md5
+      md5: d7236b5d1c9719e9bfbf85deb78076e2
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_14.pt
+      hash: md5
+      md5: 78ea9207e66eaca88716a9f6fb82b7a1
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_15.pt
+      hash: md5
+      md5: 12f6469704efe28c80f591f10b0103b4
+      size: 5134
+    - path: artifacts/model_trainer/model_epoch_2.pt
+      hash: md5
+      md5: d1136ccbfb9000b4c92b67c01c3d2ecd
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_3.pt
+      hash: md5
+      md5: 593a8c2a7e7bde19e191c219a9bd72ff
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_4.pt
+      hash: md5
+      md5: 0bb32e1e5ebe742f10e21bed79566f0b
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_5.pt
+      hash: md5
+      md5: dd9619acc643f6e7a98c5177d07a2c75
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_6.pt
+      hash: md5
+      md5: 5a757fac536cbac72d2c66f7d3e6db77
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_7.pt
+      hash: md5
+      md5: 48fc52ebb58dc44cd1d279efe364342b
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_8.pt
+      hash: md5
+      md5: 763d1c460facd61d04363467a8d48a84
+      size: 5124
+    - path: artifacts/model_trainer/model_epoch_9.pt
+      hash: md5
+      md5: 1094883e4ff0beb7d9ca122fa0d3dcad
+      size: 5124
+    - path: artifacts/model_trainer/train-val-loss.json
+      hash: md5
+      md5: bfbdc54d8b0a58864a1bd69545e73904
+      size: 1887
+    - path: artifacts/model_trainer/training_validation_metrics.png
+      hash: md5
+      md5: fbb77ea0236181d57ea1fa0f4a8b349c
+      size: 52437

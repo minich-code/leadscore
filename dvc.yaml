@@ -20,3 +20,31 @@ stages:
     - artifacts/data_validation/status.json
 
 
+
+  model_training:
+    cmd: python src/LeadGen/pipelines/pip_04_model_trainer.py
+    deps:
+    - src/LeadGen/pipelines/pip_04_model_trainer.py
+    - config/model-trainer.yaml
+    - config/model-params.yaml
+
+    outs:
+    - artifacts/model_trainer/model_epoch_1.pt
+    - artifacts/model_trainer/model_epoch_2.pt
+    - artifacts/model_trainer/model_epoch_3.pt
+    - artifacts/model_trainer/model_epoch_4.pt
+    - artifacts/model_trainer/model_epoch_5.pt
+    - artifacts/model_trainer/model_epoch_6.pt
+    - artifacts/model_trainer/model_epoch_7.pt
+    - artifacts/model_trainer/model_epoch_8.pt
+    - artifacts/model_trainer/model_epoch_9.pt
+    - artifacts/model_trainer/model_epoch_10.pt
+    - artifacts/model_trainer/model_epoch_11.pt
+    - artifacts/model_trainer/model_epoch_12.pt
+    - artifacts/model_trainer/model_epoch_13.pt
+    - artifacts/model_trainer/model_epoch_14.pt
+    - artifacts/model_trainer/model_epoch_15.pt
+    - artifacts/model_trainer/train-val-loss.json
+    - artifacts/model_trainer/training_validation_metrics.png
+
+

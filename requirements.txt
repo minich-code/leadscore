@@ -7,6 +7,7 @@
 category_encoders==2.6.3
 dagshub==0.3.28
 dvc==3.51.2
+dotenv-cli
 
 ensure==1.0.4
 
@@ -25,6 +26,7 @@ pandas==2.2.2
 pip-chill==1.0.3
 pymongo==4.7.3
 python-box==7.2.0
+python-dotenv
 pyyaml==6.0.1
 
 requests==2.32.3
