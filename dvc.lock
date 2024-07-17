@@ -125,8 +125,8 @@ stages:
     deps:
     - path: config/model-evaluation.yaml
       hash: md5
-      md5: 858ccc090a6ddcea45177e4d8aa00749
-      size: 858
+      md5: 6149f664e799c64a1db79d17efdcd78a
+      size: 669
     - path: config/model-params.yaml
       hash: md5
       md5: 94238682b3be41b43f28222c08814748
@@ -164,3 +164,47 @@ stages:
       hash: md5
       md5: ca844d9938a950d020b110a6b7428021
       size: 29593
+  model_validation:
+    cmd: python src/LeadGen/pipelines/pip_06_model_validation.py
+    deps:
+    - path: config/model-params.yaml
+      hash: md5
+      md5: 94238682b3be41b43f28222c08814748
+      size: 219
+    - path: config/model-validation.yaml
+      hash: md5
+      md5: d16406dd61d5caba78ce9c3e60a3d23f
+      size: 710
+    - path: src/LeadGen/pipelines/pip_06_model_validation.py
+      hash: md5
+      md5: eb61d55ab12755da7a54abb6bf4fee4e
+      size: 1169
+    outs:
+    - path: artifacts/model_validation/classification-report.png
+      hash: md5
+      md5: 1f3327214cb5d3dc01dc25a8ea3274f0
+      size: 535
+    - path: artifacts/model_validation/classification_report.json
+      hash: md5
+      md5: 7d0fc6430e823914f2d9ed6b257bb88d
+      size: 535
+    - path: artifacts/model_validation/confusion_matrix.json
+      hash: md5
+      md5: d870996a1b17acfa068cdbc2fa0055fe
+      size: 22
+    - path: artifacts/model_validation/metrics.json
+      hash: md5
+      md5: a713a13f19d5bed1e0f4f1d2f71647c8
+      size: 74
+    - path: artifacts/model_validation/pr_auc.png
+      hash: md5
+      md5: 03b4a55565ac57afc796a00fbeb1d19c
+      size: 24785
+    - path: artifacts/model_validation/roc_auc.png
+      hash: md5
+      md5: 1c76b733d3354f17d482e119a19f838a
+      size: 30720
+    - path: artifacts/model_validation/val_confusion_matrix.png
+      hash: md5
+      md5: 1615298887592cab275a2b2e9e9397b5
+      size: 21272
