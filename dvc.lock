@@ -120,3 +120,47 @@ stages:
       hash: md5
       md5: fbb77ea0236181d57ea1fa0f4a8b349c
       size: 52437
+  model_evaluation:
+    cmd: python src/LeadGen/pipelines/pip_05_model_evaluation.py
+    deps:
+    - path: config/model-evaluation.yaml
+      hash: md5
+      md5: 858ccc090a6ddcea45177e4d8aa00749
+      size: 858
+    - path: config/model-params.yaml
+      hash: md5
+      md5: 94238682b3be41b43f28222c08814748
+      size: 219
+    - path: src/LeadGen/pipelines/pip_05_model_evaluation.py
+      hash: md5
+      md5: 4931b612e505898caf35f4cf01dd5623
+      size: 1146
+    outs:
+    - path: artifacts/model_evaluation/classification_rep.png
+      hash: md5
+      md5: 93dd72c23400aecaf510a91e54238d2a
+      size: 85001
+    - path: artifacts/model_evaluation/classification_rep.txt
+      hash: md5
+      md5: 2cd68538aab9c639342abd6530a1cea7
+      size: 334
+    - path: artifacts/model_evaluation/confusion_matrix.png
+      hash: md5
+      md5: 8ac87e7c23149bbc8003dc1b94e75560
+      size: 19806
+    - path: artifacts/model_evaluation/confusion_matrix_rep.txt
+      hash: md5
+      md5: 14c22713261319dff47a2f6a6df7aecc
+      size: 23
+    - path: artifacts/model_evaluation/metrics.json
+      hash: md5
+      md5: 61268282cd941943c0b8799e16545a91
+      size: 74
+    - path: artifacts/model_evaluation/pr_auc.png
+      hash: md5
+      md5: 214bb230d770ef95ef796df9757e693d
+      size: 22724
+    - path: artifacts/model_evaluation/roc_auc.png
+      hash: md5
+      md5: ca844d9938a950d020b110a6b7428021
+      size: 29593
