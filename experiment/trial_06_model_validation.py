@@ -53,7 +53,8 @@ class ModelValidationConfig:
 
 
 class ConfigurationManager:
-    def __init__(self, model_validation_config=MODEL_VALIDATION_CONFIG_FILEPATH, params_config=PARAMS_CONFIG_FILEPATH):
+    def __init__(self, model_validation_config=MODEL_VALIDATION_CONFIG_FILEPATH, 
+                 params_config=PARAMS_CONFIG_FILEPATH):
         self.validation_config = read_yaml(model_validation_config)
         self.params = read_yaml(params_config)
         create_directories([self.validation_config.artifacts_root])

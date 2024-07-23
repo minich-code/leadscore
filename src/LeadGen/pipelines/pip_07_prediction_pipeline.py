@@ -5,11 +5,52 @@ import sys
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+from dataclasses import dataclass
 from pathlib import Path
 from src.LeadGen.logger import logger
 from src.LeadGen.exception import CustomException
 from src.LeadGen.utils.commons import read_yaml, load_object
 from src.LeadGen.constants import *
+
+
+@dataclass
+class PredictionPipelineConfig:
+    preprocessor_path: Path
+    model_path: str
+    model_name: str
+    #Model parameters
+    batch_size: int
+    learning_rate: float
+    epochs: int
+    dropout_rates: dict
+    optimizer: str
+    loss_function: str
+    activation_function: str
+
+class ConfigurationManager:
+    def __init__(self,
+                 prediction_pipeline_config=PREDICTION_PIPELINE_FILEPATH,
+                 params_config=PARAMS_CONFIG_FILEPATH):
+        self.params = read_yaml(params_config)
+        self.prediction_config = read_yaml(prediction_pipeline_config)
+
+    def get_prediction_pipeline_config(self) -> PredictionPipelineConfig:
+        pred_pipeline = self.prediction_config.prediction_pipeline
+        params = self.params.dnn_params
+
+        return PredictionPipelineConfig(
+            preprocessor_path=Path(pred_pipeline.preprocessor_path),
+            model_path=Path(pred_pipeline.model_path.format(model_name=pred_pipeline.model_name, epochs=params["epochs"])),
+            model_name=Path(pred_pipeline.model_name),
+            batch_size=params['batch_size'],
+            learning_rate=params['learning_rate'],
+            epochs=params['epochs'],
+            dropout_rates=params['dropout_rates'],
+            optimizer=params['optimizer'],
+            loss_function=params['loss_function'],
+            activation_function=params['activation_function']
+        )
 
 # Define the neural network class
 class SimpleNN(nn.Module):
@@ -33,16 +74,18 @@ class SimpleNN(nn.Module):
 
 # Define the prediction pipeline class
 class PredictionPipeline:
-    def __init__(self, config):
+    def __init__(self, config: PredictionPipelineConfig):
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def load_preprocessor(self):
         try:
             logger.info("Loading preprocessor")
-            preprocessor_path = self.config['preprocessor_path']
-            preprocessor = load_object(preprocessor_path)
+            preprocessor = load_object(self.config.preprocessor_path)
             return preprocessor
+        except FileNotFoundError as e:
+            logger.exception(f"Preprocessor file not found: {e}")
+            raise CustomException(f"Error during loading preprocessor: {e}")
         except Exception as e:
             logger.exception("Failed to load preprocessor.")
             raise CustomException(f"Error during loading preprocessor: {e}")
@@ -50,12 +93,14 @@ class PredictionPipeline:
     def load_model(self, input_dim):
         try:
             logger.info("Loading model")
-            model = SimpleNN(input_dim=input_dim, dropout_rates=self.config['dropout_rates'])
-            model_path = self.config['model_path']
-            model.load_state_dict(torch.load(model_path, map_location=self.device))
+            model = SimpleNN(input_dim=input_dim, dropout_rates=self.config.dropout_rates)
+            model.load_state_dict(torch.load(self.config.model_path, map_location=self.device))
             model.to(self.device)
             model.eval()
             return model
+        except FileNotFoundError as e:
+            logger.exception(f"Model file not found: {e}")
+            raise CustomException(f"Error during loading model: {e}")
         except Exception as e:
             logger.exception("Failed to load model.")
             raise CustomException(f"Error during loading model: {e}")
@@ -64,11 +109,9 @@ class PredictionPipeline:
         try:
             logger.info("Making Predictions")
 
-            # Transform the features using preprocessor
             preprocessor = self.load_preprocessor()
             transformed_features = preprocessor.transform(features)
 
-            # Load model and make predictions
             model = self.load_model(input_dim=transformed_features.shape[1])
             inputs = torch.tensor(transformed_features, dtype=torch.float32).to(self.device)
 
@@ -80,6 +123,7 @@ class PredictionPipeline:
         except Exception as e:
             logger.exception("Failed to make predictions.")
             raise CustomException(f"Error during making predictions: {e}")
+
 
 # Create a class to represent the input features
 class CustomData:
@@ -95,49 +139,3 @@ class CustomData:
         except Exception as e:
             logger.exception("Failed to convert data object to a dataframe.")
             raise CustomException(f"Error during converting data object to dataframe: {e}")
-
-# if __name__ == '__main__':
-#     try:
-#         # Example usage
-#         # config_path = Path('config.yaml')  # Convert to Path object
-#         # config = read_yaml(config_path)
-#         prediction_pipeline = PredictionPipeline(config)
-
-#         # Sample data
-#         sample_data = CustomData(
-#             Lead_Origin='API',
-#             Lead_Source='Olark Chat',
-#             Do_Not_Email='No',
-#             Do_Not_Call='No',
-#             TotalVisits=0,
-#             Total_Time_Spent_on_Website=0,
-#             Page_Views_Per_Visit=0,
-#             Last_Activity='Page Visited on Website',
-#             Specialization='Select',
-#             How_did_you_hear_about_X_Education='Select',
-#             What_is_your_current_occupation='Unemployed',
-#             What_matters_most_to_you_in_choosing_a_course='Better Career Prospects',
-#             Search='No',
-#             Newspaper_Article='No',
-#             X_Education_Forums='No',
-#             Newspaper='No',
-#             Digital_Advertisement='No',
-#             Through_Recommendations='No',
-#             Tags='Interested in other courses',
-#             Lead_Quality='Low in Relevance',
-#             Lead_Profile='Select',
-#             City='Select',
-#             Asymmetrique_Activity_Index='02.Medium',
-#             Asymmetrique_Profile_Index='02.Medium',
-#             Asymmetrique_Activity_Score=15,
-#             Asymmetrique_Profile_Score=15,
-#             A_free_copy_of_Mastering_The_Interview='No',
-#             Last_Notable_Activity='Modified',
-#             Country='Hong Kong'
-#         )
-
-#         features = sample_data.get_data_as_dataframe()
-#         predictions = prediction_pipeline.make_predictions(features)
-#         print(predictions)
-#     except CustomException as e:
-#         logger.error(f"Prediction pipeline failed: {e}")
